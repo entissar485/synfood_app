@@ -1,0 +1,179 @@
+================================================================================
+                            SYNFOOD
+        Sistema de Optimizacion de Menus Trofologicos
+================================================================================
+
+¡Bienvenido a SYNFOOD!
+
+Este sistema genera menus semanales personalizados basados en:
+- Principios trofologicos cientificos
+- Optimizacion matematica (Programacion Lineal)
+- Su perfil individual
+
+================================================================================
+                        INICIO RAPIDO (3 PASOS)
+================================================================================
+
+PASO 1: INSTALAR DEPENDENCIAS
+------------------------------
+
+Windows:
+  - Haga doble clic en: iniciar_synfood.bat
+
+Mac/Linux:
+  - Abra terminal y ejecute: bash iniciar_synfood.sh
+
+
+PASO 2: ESPERAR
+---------------
+
+La primera vez instalara las dependencias automaticamente (1-2 minutos)
+
+
+PASO 3: USAR LA APLICACION
+---------------------------
+
+La aplicacion se abrira automaticamente en su navegador en:
+  http://localhost:8501
+
+Complete el formulario y genere su menu personalizado.
+
+
+================================================================================
+                            DOCUMENTACION
+================================================================================
+
+Para mas informacion, abra estos archivos:
+
+1. INDEX.md
+   - Indice completo de todos los archivos del proyecto
+   - Guia de lectura segun su perfil
+
+2. GUIA_RAPIDA.md
+   - Guia completa para usuarios finales
+   - No requiere conocimientos tecnicos
+
+3. INSTALACION.md
+   - Instrucciones detalladas paso a paso
+   - Solucion de problemas comunes
+
+4. README.md
+   - Documentacion tecnica completa
+   - Para desarrolladores y revisores tecnicos
+
+5. RESUMEN_PROYECTO.md
+   - Resumen ejecutivo del proyecto
+   - Para evaluadores academicos
+
+
+================================================================================
+                         ARCHIVOS PRINCIPALES
+================================================================================
+
+CODIGO FUENTE (5 archivos Python):
+  - app_streamlit.py           : Aplicacion web principal
+  - modelo_optimizacion.py     : Modelo de Programacion Lineal
+  - base_alimentos.py          : Base de datos de alimentos
+  - generador_parrafos.py      : Generador de recomendaciones
+  - tabla_compatibilidades.py  : Reglas trofologicas
+
+EJECUCION:
+  - iniciar_synfood.bat        : Para Windows
+  - iniciar_synfood.sh         : Para Mac/Linux
+  - requirements.txt           : Lista de dependencias
+
+
+================================================================================
+                         REQUISITOS DEL SISTEMA
+================================================================================
+
+- Python 3.9 o superior
+- Conexion a Internet (solo para instalacion inicial)
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+
+Si no tiene Python instalado:
+  https://www.python.org/downloads/
+
+
+================================================================================
+                            SOLUCION RAPIDA
+================================================================================
+
+PROBLEMA: "Python no reconocido"
+SOLUCION: Instale Python desde python.org y marque "Add to PATH"
+
+PROBLEMA: Error al instalar dependencias
+SOLUCION: Ejecute: pip install -r requirements.txt --user
+
+PROBLEMA: Aplicacion no se abre
+SOLUCION: Copie manualmente en el navegador: http://localhost:8501
+
+
+================================================================================
+                          CONTENIDO GENERADO
+================================================================================
+
+La aplicacion genera para usted:
+
+1. MENU SEMANAL (7 dias)
+   - Desayuno, Almuerzo, Cena, Snack
+   - Combinaciones optimizadas matematicamente
+
+2. RECOMENDACIONES PERSONALIZADAS
+   - Parrafo detallado de 4000+ caracteres
+   - Fundamentos cientificos especificos
+
+3. TABLA DE COMPATIBILIDADES
+   - 16 reglas trofologicas
+   - Fundamento cientifico de cada una
+
+4. ARCHIVO EXCEL DESCARGABLE
+   - Todas las hojas en un solo archivo
+   - Formato profesional
+
+
+================================================================================
+                         OBJETIVOS DISPONIBLES
+================================================================================
+
+1. REDUCCION DE GRASA CORPORAL
+   - Enfasis en proteina y fibra
+   - Control de carga glucemica
+   - Maximo 3 tuberculos por semana
+
+2. REDUCCION DE INFLAMACION
+   - Sin carne roja
+   - Alto contenido de omega-3
+   - Alimentos antiinflamatorios
+
+3. MEJORAR HABITOS ALIMENTICIOS
+   - Mayor flexibilidad
+   - Enfasis en variedad
+   - Sostenibilidad a largo plazo
+
+
+================================================================================
+                         CONTACTO Y SOPORTE
+================================================================================
+
+Para mas informacion tecnica: Ver README.md
+Para soporte de usuario: Ver GUIA_RAPIDA.md
+Para instalacion: Ver INSTALACION.md
+
+
+================================================================================
+                             LICENCIA
+================================================================================
+
+Proyecto de Grado - 2025
+Todos los derechos reservados
+
+
+================================================================================
+
+                    ¡GRACIAS POR USAR SYNFOOD!
+
+Para comenzar: Ejecute iniciar_synfood.bat (Windows)
+                o iniciar_synfood.sh (Mac/Linux)
+
+================================================================================
