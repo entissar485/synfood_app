@@ -334,7 +334,16 @@ ALIMENTOS = {
         "es_tuberculo": False,
         "es_carne_roja": False
     },
-    
+    "Hummus": {
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 2,
+        "omega3": False,
+        "antiinflamatorio": True,
+        "carga_glucemica": 6,
+        "es_tuberculo": False,
+        "es_carne_roja": False
+    },
     # FERMENTOS
     "caldo de hueso": {
         "categoria": "FERMENTO",

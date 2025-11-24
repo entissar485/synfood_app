@@ -66,7 +66,7 @@ class OptimizadorMenuTrofologico:
         Sin tubérculos (regla trofológica)
         """
         # Proteínas reales para desayuno
-        proteinas = ["huevo", "pollo", "pavo", "caldo de hueso + proteina en polvo"]
+        proteinas = ["huevo", "pavo", "caldo de hueso + proteina en polvo"]
         grasas = ["aguacate", "aceite de oliva", "aceite de coco", "almendras", "semillas de calabaza", "aceitunas"]
         fermentos = ["vinagre de manzana", "kimchi", "chucrut"]
         
@@ -140,7 +140,7 @@ class OptimizadorMenuTrofologico:
         Snack: Fruta + Grasa
         Sin tubérculos
         """
-        frutas = ["frutos rojos", "mango", "papaya", "coco", "piña"]
+        frutas = ["frutos rojos", "mango", "papaya", "coco", "piña","Hummus"]
         grasas = ["almendras", "semillas de calabaza", "marañones", "coco"]
         
         fruta = self.seleccionar_mejor_alimento(frutas)
