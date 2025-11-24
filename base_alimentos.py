@@ -1,358 +1,413 @@
 # -*- coding: utf-8 -*-
 """
-Base de datos de alimentos con categorías trofológicas
-Basado en protocolos reales de trofología
+Base de datos de alimentos con propiedades nutricionales
+Sistema de scoring para optimización multiobjetivo
 """
-
-CATEGORIAS = {
-    "PROTEINA_ANIMAL": "Proteína Animal",
-    "PROTEINA_VEGETAL": "Proteína Vegetal", 
-    "TUBERCULO": "Tubérculo/Raíz",
-    "VEGETAL": "Vegetal",
-    "GRASA_SALUDABLE": "Grasa Saludable",
-    "FRUTA_NEUTRA": "Fruta Neutra",
-    "FRUTA_ACIDA": "Fruta Ácida",
-    "FERMENTO": "Fermento",
-    "CONDIMENTO": "Condimento",
-    "CEREAL": "Cereal"
-}
 
 ALIMENTOS = {
     # PROTEÍNAS ANIMALES
-    "pollo": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["carne_blanca"],
-        "gramos_proteina_por_30g": 8,
+    "huevo": {
+        "categoria": "PROTEINA",
+        "proteina_g": 6,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
+    },
+    "pollo": {
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
+        "omega3": False,
+        "antiinflamatorio": False,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "pavo": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["carne_blanca"],
-        "gramos_proteina_por_30g": 8,
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "res": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["carne_roja"],
-        "gramos_proteina_por_30g": 8,
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": True
     },
     "pescado": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["pescado"],
-        "gramos_proteina_por_30g": 8,
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
         "omega3": True,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "salmon": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["pescado", "omega3"],
-        "gramos_proteina_por_30g": 8,
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
         "omega3": True,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "trucha": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["pescado", "omega3"],
-        "gramos_proteina_por_30g": 8,
+        "categoria": "PROTEINA",
+        "proteina_g": 8,
+        "fibra_g": 0,
         "omega3": True,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
-    "huevo": {
-        "categoria": "PROTEINA_ANIMAL",
-        "subcategorias": ["huevo"],
-        "gramos_proteina_por_30g": 6,
+    "caldo de hueso + proteina en polvo": {
+        "categoria": "PROTEINA",
+        "proteina_g": 20,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     
-    # PROTEÍNAS VEGETALES
-    "proteina en polvo": {
-        "categoria": "PROTEINA_VEGETAL",
-        "subcategorias": ["proteina_polvo"],
-        "gramos_proteina_por_30g": 20,
-        "omega3": False,
-        "antiinflamatorio": True
-    },
-    
-    # TUBÉRCULOS Y RAÍCES
+    # TUBÉRCULOS Y CEREALES
     "papa": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 15,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
     "yuca": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 16,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
     "platano": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": False,
+        "carga_glucemica": 18,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
     "zapallo": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo", "antioxidante"],
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 8,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
-    "zanahoria": {
+    "arroz": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo", "antioxidante"],
+        "proteina_g": 0,
+        "fibra_g": 1,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": False,
+        "carga_glucemica": 20,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
     "remolacha": {
         "categoria": "TUBERCULO",
-        "subcategorias": ["tuberculo"],
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
-    },
-    
-    # CEREALES
-    "arroz": {
-        "categoria": "CEREAL",
-        "subcategorias": ["cereal"],
-        "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": True,
+        "carga_glucemica": 5,
+        "es_tuberculo": True,
+        "es_carne_roja": False
     },
     
     # VEGETALES
     "ensalada": {
         "categoria": "VEGETAL",
-        "subcategorias": ["hoja_verde", "fibra"],
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "pepino": {
         "categoria": "VEGETAL",
-        "subcategorias": ["hidratante"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "apio": {
         "categoria": "VEGETAL",
-        "subcategorias": ["hidratante", "fibra"],
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "champinones": {
         "categoria": "VEGETAL",
-        "subcategorias": ["hongo"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "hongos": {
         "categoria": "VEGETAL",
-        "subcategorias": ["hongo"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "pimenton": {
         "categoria": "VEGETAL",
-        "subcategorias": ["vitamina_c"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     
     # GRASAS SALUDABLES
     "aguacate": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["grasa_monoinsaturada", "fibra"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 7,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "aceite de oliva": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["grasa_monoinsaturada", "polifenoles"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "aceite de coco": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["grasa_saturada_vegetal"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "aceitunas": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["grasa_monoinsaturada"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "almendras": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["fibra", "fruto_seco"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 4,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "semillas de calabaza": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["semilla", "zinc"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "maranones": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["fruto_seco"],
+        "categoria": "GRASA",
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
-    },
-    "ghee": {
-        "categoria": "GRASA_SALUDABLE",
-        "subcategorias": ["grasa_animal"],
-        "omega3": False,
-        "antiinflamatorio": False
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     
-    # FRUTAS NEUTRAS
+    # FRUTAS
     "mango": {
-        "categoria": "FRUTA_NEUTRA",
-        "subcategorias": ["fibra_soluble"],
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 3,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 10,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "papaya": {
-        "categoria": "FRUTA_NEUTRA",
-        "subcategorias": ["enzimas_digestivas"],
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 6,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "coco": {
-        "categoria": "FRUTA_NEUTRA",
-        "subcategorias": ["grasa_saturada"],
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 9,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 3,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
-    
-    # FRUTAS ÁCIDAS
-    "limon": {
-        "categoria": "FRUTA_ACIDA",
-        "subcategorias": ["vitamina_c"],
+    "frutos rojos": {
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 9,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 4,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
-    "pina": {
-        "categoria": "FRUTA_ACIDA",
-        "subcategorias": ["enzimas_digestivas", "vitamina_c"],
+    "piña": {
+        "categoria": "FRUTA",
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 12,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     
     # FERMENTOS
     "caldo de hueso": {
         "categoria": "FERMENTO",
-        "subcategorias": ["colageno", "minerales"],
+        "proteina_g": 0,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "vinagre de manzana": {
         "categoria": "FERMENTO",
-        "subcategorias": ["acido"],
+        "proteina_g": 0,
+        "fibra_g": 0,
         "omega3": False,
-        "antiinflamatorio": True
-    },
-    "kimchi": {
-        "categoria": "FERMENTO",
-        "subcategorias": ["probiotico"],
-        "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     },
     "chucrut": {
         "categoria": "FERMENTO",
-        "subcategorias": ["probiotico"],
+        "proteina_g": 0,
+        "fibra_g": 2,
         "omega3": False,
-        "antiinflamatorio": True
-    },
-    
-    # CONDIMENTOS
-    "oregano": {
-        "categoria": "CONDIMENTO",
-        "subcategorias": ["antiinflamatorio"],
-        "omega3": False,
-        "antiinflamatorio": True
-    },
-    "ajo": {
-        "categoria": "CONDIMENTO",
-        "subcategorias": ["antiinflamatorio"],
-        "omega3": False,
-        "antiinflamatorio": True
-    },
-    "curry": {
-        "categoria": "CONDIMENTO",
-        "subcategorias": ["antiinflamatorio"],
-        "omega3": False,
-        "antiinflamatorio": True
-    },
-    "cilantro": {
-        "categoria": "CONDIMENTO",
-        "subcategorias": ["digestivo"],
-        "omega3": False,
-        "antiinflamatorio": True
+        "antiinflamatorio": True,
+        "carga_glucemica": 0,
+        "es_tuberculo": False,
+        "es_carne_roja": False
     }
 }
 
-# REGLAS TROFOLÓGICAS ESTRICTAS
-REGLAS_INCOMPATIBILIDAD = [
-    {
-        "nombre": "res_con_tuberculo",
-        "descripcion": "Res + tubérculo/cereal",
-        "penalizacion": 100.0,
-        "fundamento": "La res NO se mezcla con carbohidratos. Competencia enzimática."
-    },
-    {
-        "nombre": "frutas_con_comida",
-        "descripcion": "Frutas con comida principal",
-        "penalizacion": 100.0,
-        "fundamento": "Las frutas NO se mezclan con comidas principales. Solo como snack."
-    },
-    {
-        "nombre": "multiples_proteinas",
-        "descripcion": "Más de 1 proteína en misma comida",
-        "penalizacion": 100.0,
-        "fundamento": "Evitar mezclar varias proteínas en una comida."
-    },
-    {
-        "nombre": "multiples_tuberculos",
-        "descripcion": "Más de 1 tubérculo/cereal en misma comida",
-        "penalizacion": 100.0,
-        "fundamento": "Evitar mezclar varios carbohidratos en una comida."
-    }
-]
-
-RESTRICCIONES_OBJETIVO = {
+# PESOS DE LA FUNCIÓN OBJETIVO POR TIPO DE OBJETIVO
+PESOS_OBJETIVO = {
     "Obesidad": {
-        "max_tuberculos_semana": 7,
-        "prioridad_proteina": True,
-        "prioridad_fibra": True
+        "w_P": 1.5,      # Proteína alta
+        "w_F": 2.0,      # Fibra MUY alta
+        "w_Omega": 1.0,  # Omega-3 normal
+        "w_A": 1.0,      # Antioxidantes normal
+        "w_GL": 1.5,     # Penalizar MUCHO carga glucémica
+        "w_D": 1.2       # Diversidad moderada
     },
     "Inflamacion": {
-        "max_tuberculos_semana": 7,
-        "prioridad_omega3": True,
-        "evitar_carne_roja": True
+        "w_P": 1.2,      # Proteína moderada
+        "w_F": 1.5,      # Fibra alta
+        "w_Omega": 3.0,  # Omega-3 MUY alta (pescado prioritario)
+        "w_A": 2.5,      # Antioxidantes MUY altos
+        "w_GL": 0,     # Penalizar carga glucémica
+        "w_D": 1.0       # Diversidad normal
     },
     "Mejorar_habitos": {
-        "max_tuberculos_semana": 10,
-        "balance_general": True
+        "w_P": 1.0,      # Proteína balanceada
+        "w_F": 1.0,      # Fibra balanceada
+        "w_Omega": 1.0,  # Omega-3 balanceado
+        "w_A": 1.0,      # Antioxidantes balanceados
+        "w_GL": 0,     # Carga glucémica balanceada
+        "w_D": 2.0       # Diversidad MUY alta (prioridad)
     }
 }
 
-def obtener_alimento(nombre_normalizado):
-    return ALIMENTOS.get(nombre_normalizado, None)
-
-def tiene_categoria(alimento_info, categoria):
-    if not alimento_info:
-        return False
-    return alimento_info["categoria"] == categoria
-
-def tiene_subcategoria(alimento_info, subcategoria):
-    if not alimento_info:
-        return False
-    return subcategoria in alimento_info.get("subcategorias", [])
+# RESTRICCIONES POR OBJETIVO
+RESTRICCIONES_OBJETIVO = {
+    "Obesidad": {
+        "evitar_carne_roja": False,
+        "descripcion": "Alta proteína, alta fibra, baja carga glucémica"
+    },
+    "Inflamacion": {
+        "evitar_carne_roja": True,
+        "descripcion": "Alto omega-3, altos antioxidantes, prioridad pescado"
+    },
+    "Mejorar_habitos": {
+        "evitar_carne_roja": False,
+        "descripcion": "Balance general, máxima diversidad de alimentos"
+    }
+}
